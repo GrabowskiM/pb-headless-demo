@@ -36,13 +36,20 @@ function RootLayout() {
 
   return (
     <>
-      <nav>
-        <ul>
-          {menu.map((item) => (
-            <li key={item.id}>{item.name}</li>
-          ))}
-        </ul>
-      </nav>
+      <header className="site-header">
+        <div className="site-header__inner">
+          <span className="site-header__logo">
+            <img src="/cohesivo-logo.svg" alt="Cohesivo" />
+          </span>
+          <nav className="site-nav">
+            <ul>
+              {menu.map((item) => (
+                <li key={item.id}>{item.name}</li>
+              ))}
+            </ul>
+          </nav>
+        </div>
+      </header>
       <Outlet />
     </>
   )
