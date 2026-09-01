@@ -31,6 +31,13 @@ export const Route = createRootRoute({
   shellComponent: RootDocument,
 })
 
+const FOOTER_SECTIONS = [
+  { title: 'Company', links: ['About us', 'Careers', 'Newsroom', 'Contact'] },
+  { title: 'Products', links: ['Platform', 'Integrations', 'Pricing', 'Roadmap'] },
+  { title: 'Resources', links: ['Documentation', 'Guides', 'Support', 'Status'] },
+  { title: 'Legal', links: ['Privacy', 'Terms', 'Cookies', 'Accessibility'] },
+]
+
 function RootLayout() {
   const menu = Route.useLoaderData()
 
@@ -51,6 +58,30 @@ function RootLayout() {
         </div>
       </header>
       <Outlet />
+      <footer className="site-footer">
+        <div className="site-footer__inner">
+          <div className="site-footer__brand">
+            <img src="/cohesivo-logo-light.svg" alt="Cohesivo" />
+            <p>A headless storefront rendered from Ibexa DXP.</p>
+          </div>
+          <div className="site-footer__sections">
+            {FOOTER_SECTIONS.map((section) => (
+              <div className="site-footer__section" key={section.title}>
+                <h2>{section.title}</h2>
+                <ul>
+                  {section.links.map((link) => (
+                    <li key={link}>{link}</li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="site-footer__bar">
+          <span>&copy; {new Date().getFullYear()} Cohesivo</span>
+          <span>Built with TanStack Start</span>
+        </div>
+      </footer>
     </>
   )
 }
