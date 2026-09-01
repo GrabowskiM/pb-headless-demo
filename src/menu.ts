@@ -1,5 +1,5 @@
 const REST_URL = import.meta.env.VITE_IBEXA_REST_URL
-const MENU_PARENT_LOCATION_ID = 132
+const MENU_PARENT_LOCATION_ID = 434
 
 export interface MenuItem {
   id: number
