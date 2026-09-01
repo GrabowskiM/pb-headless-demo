@@ -1,4 +1,6 @@
-import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router'
+import { HeadContent, Outlet, Scripts, createRootRoute } from '@tanstack/react-router'
+
+import { loadMenu } from '#/menu'
 
 import appCss from '../styles.css?url'
 
@@ -13,7 +15,7 @@ export const Route = createRootRoute({
         content: 'width=device-width, initial-scale=1',
       },
       {
-        title: 'TanStack Start Starter',
+        title: 'Headless landing page',
       },
     ],
     links: [
@@ -23,8 +25,28 @@ export const Route = createRootRoute({
       },
     ],
   }),
+  loader: () => loadMenu(),
+  staleTime: Infinity,
+  component: RootLayout,
   shellComponent: RootDocument,
 })
+
+function RootLayout() {
+  const menu = Route.useLoaderData()
+
+  return (
+    <>
+      <nav>
+        <ul>
+          {menu.map((item) => (
+            <li key={item.id}>{item.name}</li>
+          ))}
+        </ul>
+      </nav>
+      <Outlet />
+    </>
+  )
+}
 
 function RootDocument({ children }: { children: React.ReactNode }) {
   return (
