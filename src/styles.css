@@ -287,3 +287,15 @@ main {
 .static-page li {
     margin-bottom: 0.5rem;
 }
+
+.layout--split {
+    display: grid;
+    gap: 2.5rem;
+}
+
+.layout__columns {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+    gap: 2.5rem;
+    align-items: start;
+}
