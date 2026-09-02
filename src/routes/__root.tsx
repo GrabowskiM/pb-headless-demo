@@ -1,4 +1,4 @@
-import { HeadContent, Outlet, Scripts, createRootRoute } from '@tanstack/react-router';
+import { HeadContent, Link, Outlet, Scripts, createRootRoute } from '@tanstack/react-router';
 
 import { loadMenu } from '#/menu';
 
@@ -52,7 +52,7 @@ const RootLayout = () => {
                 </div>
                 <div className="site-footer__bar">
                     <span>&copy; {new Date().getFullYear()} Cohesivo</span>
-                    <span>Built with TanStack Start</span>
+                    <Link to="/about">About this demo</Link>
                 </div>
             </footer>
         </>
