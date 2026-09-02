@@ -224,3 +224,20 @@ main {
     color: #0e1216;
     text-decoration: underline;
 }
+
+.block-richtext {
+    max-width: 44rem;
+    margin-bottom: 2.5rem;
+    line-height: 1.65;
+}
+
+.block-richtext h2 {
+    margin: 0 0 1rem;
+    font-size: 1.75rem;
+    letter-spacing: -0.02em;
+}
+
+.block-richtext p {
+    margin: 0 0 1rem;
+    color: #3b444d;
+}
