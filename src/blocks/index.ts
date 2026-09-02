@@ -1,5 +1,5 @@
-import { ContentListBlock } from '#/blocks/ContentListBlock';
-import { RichTextBlock } from '#/blocks/RichTextBlock';
+import { ContentListBlock } from './ContentListBlock';
+import { RichTextBlock } from './RichTextBlock';
 
 export const blockComponents = {
     contentlist: ContentListBlock,

@@ -1,6 +1,6 @@
 import type { BlockData, FieldValue } from '@ibexa/react-headless';
 
-import { loadContentListItems } from '#/blocks/contentList';
+import { loadContentListItems } from '#/blocks/ContentListBlock';
 
 export type BlockWithData = BlockData & { data?: unknown };
 

@@ -1,5 +1,5 @@
 import type { BlockWithData } from '#/blockData';
-import type { ContentListItem } from '#/blocks/contentList';
+import type { ContentListItem } from './loadContentListItems';
 
 interface ContentListBlockProps {
     block: BlockWithData;
