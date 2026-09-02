@@ -18,7 +18,6 @@ export const ContentListBlock = ({ block }: ContentListBlockProps) => {
 
     return (
         <section className="block-content-list">
-            <h2>{block.name}</h2>
             <ul className={isPersonList ? 'person-list' : undefined}>
                 {items.map((item) => (isPersonList ? <PersonCard item={item} key={item.id} /> : <li key={item.id}>{item.name}</li>))}
             </ul>
