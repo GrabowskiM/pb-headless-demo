@@ -1,5 +1,14 @@
 export const REST_URL = import.meta.env.VITE_IBEXA_REST_URL;
 
+export class RestError extends Error {
+    readonly status: number;
+
+    constructor(status: number, path: string) {
+        super(`${path} responded with ${String(status)}`);
+        this.status = status;
+    }
+}
+
 export const restFetch = async <T>(path: string, accept: string, init?: RequestInit): Promise<T> => {
     const headers = new Headers(init?.headers);
 
@@ -8,7 +17,7 @@ export const restFetch = async <T>(path: string, accept: string, init?: RequestI
     const response = await fetch(`${REST_URL}${path}`, { ...init, headers });
 
     if (!response.ok) {
-        throw new Error(`${path} responded with ${String(response.status)}`);
+        throw new RestError(response.status, path);
     }
 
     const payload: unknown = await response.json();

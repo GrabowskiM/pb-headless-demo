@@ -15,9 +15,9 @@ interface PageFieldResponse {
     fieldValue: FieldValue;
 }
 
-export const loadPageFieldValue = async (): Promise<FieldValue> => {
+const loadFieldValue = async (locationQuery: string): Promise<FieldValue> => {
     const location = await restFetch<LocationResponse>(
-        `/api/ibexa/v2/content/locations?id=${String(PAGE_LOCATION_ID)}`,
+        `/api/ibexa/v2/content/locations?${locationQuery}`,
         'application/vnd.ibexa.api.Location+json',
     );
     const { _id, currentVersionNo } = location.Location.ContentInfo.Content;
@@ -28,3 +28,7 @@ export const loadPageFieldValue = async (): Promise<FieldValue> => {
 
     return loadBlockData(page.fieldValue);
 };
+
+export const loadPageFieldValue = (): Promise<FieldValue> => loadFieldValue(`id=${String(PAGE_LOCATION_ID)}`);
+
+export const loadPageFieldValueByAlias = (alias: string): Promise<FieldValue> => loadFieldValue(`urlAlias=${encodeURIComponent(alias)}`);
