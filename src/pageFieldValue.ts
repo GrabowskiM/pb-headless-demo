@@ -25,5 +25,7 @@ export async function loadPageFieldValue(): Promise<FieldValue> {
     'application/json',
   )
 
+  console.log(page.fieldValue.zones[0].blocks[1].attributes);
+
   return page.fieldValue
 }
