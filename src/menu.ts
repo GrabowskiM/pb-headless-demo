@@ -1,58 +1,48 @@
-import { REST_URL } from '#/rest'
+import { restFetch } from '#/rest';
 
-const MENU_PARENT_LOCATION_ID = 431
+const MENU_PARENT_LOCATION_ID = 431;
+const MENU_LIMIT = 50;
 
 export interface MenuItem {
-  id: number
-  name: string
+    id: number;
+    name: string;
 }
 
 interface ContentHit {
-  value: {
-    Content: {
-      TranslatedName: string
-      isHidden: boolean
-      MainLocation: { _href: string }
-    }
-  }
+    value: {
+        Content: {
+            MainLocation: { _href: string };
+            TranslatedName: string;
+            isHidden: boolean;
+        };
+    };
 }
 
 interface ViewResponse {
-  View: { Result: { searchHits: { searchHit: Array<ContentHit> } } }
+    View: { Result: { searchHits: { searchHit: ContentHit[] } } };
 }
 
-function locationId(href: string): number {
-  return Number(href.split('/').pop())
-}
+const locationId = (href: string): number => Number(href.split('/').pop());
 
-export async function loadMenu(): Promise<Array<MenuItem>> {
-  const response = await fetch(`${REST_URL}/api/ibexa/v2/views`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/vnd.ibexa.api.ViewInput+json',
-      Accept: 'application/vnd.ibexa.api.View+json',
-    },
-    body: JSON.stringify({
-      ViewInput: {
-        identifier: 'top-menu',
-        public: false,
-        Query: {
-          Filter: { ParentLocationIdCriterion: MENU_PARENT_LOCATION_ID },
-          limit: 50,
-        },
-      },
-    }),
-  })
+export const loadMenu = async (): Promise<MenuItem[]> => {
+    const { View } = await restFetch<ViewResponse>('/api/ibexa/v2/views', 'application/vnd.ibexa.api.View+json', {
+        body: JSON.stringify({
+            ViewInput: {
+                Query: {
+                    Filter: { ParentLocationIdCriterion: MENU_PARENT_LOCATION_ID },
+                    limit: MENU_LIMIT,
+                },
+                identifier: 'top-menu',
+                public: false,
+            },
+        }),
+        headers: { 'Content-Type': 'application/vnd.ibexa.api.ViewInput+json' },
+        method: 'POST',
+    });
 
-  if (!response.ok) {
-    throw new Error(`Views responded with ${response.status}`)
-  }
-
-  const { View } = (await response.json()) as ViewResponse
-
-  return View.Result.searchHits.searchHit
-    .map(({ value }) => value.Content)
-    .filter((content) => !content.isHidden)
-    .map((content) => ({ id: locationId(content.MainLocation._href), name: content.TranslatedName }))
-    .sort((first, second) => first.id - second.id)
-}
+    return View.Result.searchHits.searchHit
+        .map(({ value }) => value.Content)
+        .filter((content) => !content.isHidden)
+        .map((content) => ({ id: locationId(content.MainLocation._href), name: content.TranslatedName }))
+        .sort((first, second) => first.id - second.id);
+};

@@ -1,9 +1,7 @@
-import { createContext, useContext } from 'react'
+import { createContext, useContext } from 'react';
 
-import type { ContentLists } from '#/contentList'
+import type { ContentListItem, ContentLists } from '#/contentList';
 
-export const ContentListsContext = createContext<ContentLists>({})
+export const ContentListsContext = createContext<ContentLists>({});
 
-export function useContentList(blockId: string) {
-  return useContext(ContentListsContext)[blockId] ?? []
-}
+export const useContentList = (blockId: string): ContentListItem[] => useContext(ContentListsContext)[blockId] ?? [];
