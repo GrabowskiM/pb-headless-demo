@@ -10,6 +10,8 @@ const isContentListItems = (value: unknown): value is ContentListItem[] => Array
 export const ContentListBlock = ({ block }: ContentListBlockProps) => {
     const items = isContentListItems(block.data) ? block.data : [];
 
+    console.log(items);
+
     return (
         <section className="block-content-list">
             <h2>{block.name}</h2>

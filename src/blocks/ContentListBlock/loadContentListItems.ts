@@ -2,21 +2,46 @@ import type { BlockData } from '@ibexa/react-headless';
 
 import { restFetch } from '#/rest';
 
+export interface ContentListThumbnail {
+    height: number;
+    mimeType: string;
+    resource: string;
+    width: number;
+}
+
 export interface ContentListItem {
+    fields: Record<string, unknown>;
     id: number;
     name: string;
+    thumbnail: ContentListThumbnail | null;
 }
 
 interface ContentInfoResponse {
     Content: { MainLocation: { _href: string } };
 }
 
-interface ViewResponse {
-    View: {
-        Result: {
-            searchHits: { searchHit: { value: { Content: { TranslatedName: string; _id: number } } }[] };
+interface ContentFieldResponse {
+    fieldDefinitionIdentifier: string;
+    fieldValue: unknown;
+}
+
+interface ContentHit {
+    value: {
+        Content: {
+            CurrentVersion: {
+                Version: {
+                    Fields: { field: ContentFieldResponse[] };
+                    Thumbnail: ContentListThumbnail | null;
+                };
+            };
+            TranslatedName: string;
+            _id: number;
         };
     };
+}
+
+interface ViewResponse {
+    View: { Result: { searchHits: { searchHit: ContentHit[] } } };
 }
 
 const attribute = (block: BlockData, name: string): string | null =>
@@ -54,8 +79,18 @@ export const loadContentListItems = async (block: BlockData): Promise<ContentLis
         method: 'POST',
     });
 
-    return view.View.Result.searchHits.searchHit.map(({ value }) => ({
-        id: value.Content._id,
-        name: value.Content.TranslatedName,
-    }));
+    console.log(view.View.Result.searchHits.searchHit);
+
+    return view.View.Result.searchHits.searchHit.map(({ value }) => {
+        const { CurrentVersion, TranslatedName, _id } = value.Content;
+
+        return {
+            fields: Object.fromEntries(
+                CurrentVersion.Version.Fields.field.map((field) => [field.fieldDefinitionIdentifier, field.fieldValue]),
+            ),
+            id: _id,
+            name: TranslatedName,
+            thumbnail: CurrentVersion.Version.Thumbnail,
+        };
+    });
 };
