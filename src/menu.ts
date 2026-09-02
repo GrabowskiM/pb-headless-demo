@@ -1,9 +1,16 @@
 import { restFetch } from '#/rest';
 
 const MENU_PARENT_LOCATION_ID = 431;
+const MENU_CONTENT_TYPE = 'headless_landing_page';
 const MENU_LIMIT = 50;
 
 export interface MenuItem {
+    href: string;
+    id: number;
+    name: string;
+}
+
+interface ResolvedMenuItem {
     href: string | null;
     id: number;
     name: string;
@@ -31,6 +38,8 @@ interface UrlAliasResponse {
     UrlAlias: { path: string };
 }
 
+const hasAlias = (item: ResolvedMenuItem): item is MenuItem => item.href !== null;
+
 const loadCustomAliasPath = async (locationHref: string): Promise<string | null> => {
     const refs = await restFetch<UrlAliasRefListResponse>(`${locationHref}/urlaliases`, 'application/vnd.ibexa.api.UrlAliasRefList+json');
     const ref = refs.UrlAliasRefList.UrlAlias.at(0);
@@ -51,7 +60,10 @@ export const loadMenu = async (): Promise<MenuItem[]> => {
         body: JSON.stringify({
             ViewInput: {
                 Query: {
-                    Filter: { ParentLocationIdCriterion: MENU_PARENT_LOCATION_ID },
+                    Filter: {
+                        ContentTypeIdentifierCriterion: [MENU_CONTENT_TYPE],
+                        ParentLocationIdCriterion: MENU_PARENT_LOCATION_ID,
+                    },
                     limit: MENU_LIMIT,
                 },
                 identifier: 'top-menu',
@@ -73,5 +85,5 @@ export const loadMenu = async (): Promise<MenuItem[]> => {
             })),
     );
 
-    return items.sort((first, second) => first.id - second.id);
+    return items.filter(hasAlias).sort((first, second) => first.id - second.id);
 };
