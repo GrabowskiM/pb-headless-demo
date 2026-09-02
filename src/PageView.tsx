@@ -8,7 +8,7 @@ import { blockComponents } from '#/blocks';
 import { resolveLayout } from '#/layouts';
 
 interface PageViewProps {
-    fieldValue: FieldValue;
+    fieldValue: FieldValue | null;
 }
 
 const PB_ORIGIN = import.meta.env.VITE_PB_ORIGIN;
@@ -30,7 +30,7 @@ const Zones = () => {
 };
 
 export const PageView = ({ fieldValue }: PageViewProps) => (
-    <LandingPage blockComponents={blockComponents} fieldValue={fieldValue} origin={PB_ORIGIN}>
+    <LandingPage blockComponents={blockComponents} fieldValue={fieldValue ?? undefined} origin={PB_ORIGIN}>
         <Zones />
     </LandingPage>
 );

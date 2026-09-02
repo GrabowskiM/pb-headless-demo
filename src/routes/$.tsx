@@ -2,6 +2,7 @@ import { createFileRoute, notFound } from '@tanstack/react-router';
 
 import { PageView } from '#/PageView';
 import { RestError } from '#/rest';
+import { isFramed } from '#/isFramed';
 import { loadPageFieldValueByAlias } from '#/pageFieldValue';
 
 const NOT_FOUND = 404;
@@ -11,6 +12,10 @@ const AliasPage = () => <PageView fieldValue={Route.useLoaderData()} />;
 export const Route = createFileRoute('/$')({
     component: AliasPage,
     loader: async ({ params }) => {
+        if (isFramed()) {
+            return null;
+        }
+
         try {
             return await loadPageFieldValueByAlias(`/${params._splat ?? ''}`);
         } catch (error) {
