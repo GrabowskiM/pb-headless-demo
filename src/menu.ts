@@ -4,6 +4,7 @@ const MENU_PARENT_LOCATION_ID = 431;
 const MENU_LIMIT = 50;
 
 export interface MenuItem {
+    href: string | null;
     id: number;
     name: string;
 }
@@ -21,6 +22,27 @@ interface ContentHit {
 interface ViewResponse {
     View: { Result: { searchHits: { searchHit: ContentHit[] } } };
 }
+
+interface UrlAliasRefListResponse {
+    UrlAliasRefList: { UrlAlias: { _href: string }[] };
+}
+
+interface UrlAliasResponse {
+    UrlAlias: { path: string };
+}
+
+const loadCustomAliasPath = async (locationHref: string): Promise<string | null> => {
+    const refs = await restFetch<UrlAliasRefListResponse>(`${locationHref}/urlaliases`, 'application/vnd.ibexa.api.UrlAliasRefList+json');
+    const ref = refs.UrlAliasRefList.UrlAlias.at(0);
+
+    if (!ref) {
+        return null;
+    }
+
+    const alias = await restFetch<UrlAliasResponse>(ref._href, 'application/vnd.ibexa.api.UrlAlias+json');
+
+    return alias.UrlAlias.path;
+};
 
 const locationId = (href: string): number => Number(href.split('/').pop());
 
@@ -40,9 +62,16 @@ export const loadMenu = async (): Promise<MenuItem[]> => {
         method: 'POST',
     });
 
-    return View.Result.searchHits.searchHit
-        .map(({ value }) => value.Content)
-        .filter((content) => !content.isHidden)
-        .map((content) => ({ id: locationId(content.MainLocation._href), name: content.TranslatedName }))
-        .sort((first, second) => first.id - second.id);
+    const items = await Promise.all(
+        View.Result.searchHits.searchHit
+            .map(({ value }) => value.Content)
+            .filter((content) => !content.isHidden)
+            .map(async (content) => ({
+                href: await loadCustomAliasPath(content.MainLocation._href),
+                id: locationId(content.MainLocation._href),
+                name: content.TranslatedName,
+            })),
+    );
+
+    return items.sort((first, second) => first.id - second.id);
 };

@@ -24,7 +24,7 @@ const RootLayout = () => {
                     <nav className="site-nav">
                         <ul>
                             {menu.map((item) => (
-                                <li key={item.id}>{item.name}</li>
+                                <li key={item.id}>{item.href ? <a href={item.href}>{item.name}</a> : item.name}</li>
                             ))}
                         </ul>
                     </nav>
