@@ -1,5 +1,6 @@
 import type { FieldValue } from '@ibexa/react-headless';
 
+import { loadBlockData } from '#/blockData';
 import { restFetch } from '#/rest';
 
 const PAGE_LOCATION_ID = 431;
@@ -25,7 +26,5 @@ export const loadPageFieldValue = async (): Promise<FieldValue> => {
         'application/json',
     );
 
-    console.log(page.fieldValue);
-
-    return page.fieldValue;
+    return loadBlockData(page.fieldValue);
 };

@@ -1,4 +1,4 @@
-import type { BlockData, FieldValue } from '@ibexa/react-headless';
+import type { BlockData } from '@ibexa/react-headless';
 
 import { restFetch } from '#/rest';
 
@@ -6,8 +6,6 @@ export interface ContentListItem {
     id: number;
     name: string;
 }
-
-export type ContentLists = Record<string, ContentListItem[]>;
 
 interface ContentInfoResponse {
     Content: { MainLocation: { _href: string } };
@@ -24,10 +22,7 @@ interface ViewResponse {
 const attribute = (block: BlockData, name: string): string | null =>
     block.attributes.find((candidate) => candidate.name === name)?.value ?? null;
 
-export const findContentListBlocks = (fieldValue: FieldValue): BlockData[] =>
-    fieldValue.zones.flatMap((zone) => zone.blocks).filter((block) => block.type === 'contentlist');
-
-const loadItems = async (block: BlockData): Promise<ContentListItem[]> => {
+export const loadContentListItems = async (block: BlockData): Promise<ContentListItem[]> => {
     const contentId = attribute(block, 'contentId');
     const contentType = attribute(block, 'contentType');
     const limit = Number(attribute(block, 'limit'));
@@ -63,11 +58,4 @@ const loadItems = async (block: BlockData): Promise<ContentListItem[]> => {
         id: value.Content._id,
         name: value.Content.TranslatedName,
     }));
-};
-
-export const loadContentLists = async (fieldValue: FieldValue): Promise<ContentLists> => {
-    const blocks = findContentListBlocks(fieldValue);
-    const lists = await Promise.all(blocks.map(async (block) => [block.id, await loadItems(block)] as const));
-
-    return Object.fromEntries(lists);
 };
