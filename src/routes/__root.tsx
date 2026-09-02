@@ -18,9 +18,9 @@ const RootLayout = () => {
         <>
             <header className="site-header">
                 <div className="site-header__inner">
-                    <span className="site-header__logo">
+                    <Link className="site-header__logo" to="/">
                         <img alt="Cohesivo" src="/cohesivo-logo.svg" />
-                    </span>
+                    </Link>
                     <nav className="site-nav">
                         <ul>
                             {menu.map((item) => (

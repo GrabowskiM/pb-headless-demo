@@ -34,6 +34,12 @@ body {
     display: flex;
     align-items: center;
     flex-shrink: 0;
+    border-radius: 2px;
+}
+
+.site-header__logo:focus-visible {
+    outline: 2px solid #0e1216;
+    outline-offset: 4px;
 }
 
 .site-header__logo img {
