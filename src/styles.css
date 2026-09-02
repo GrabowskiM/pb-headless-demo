@@ -299,3 +299,20 @@ main {
     gap: 2.5rem;
     align-items: start;
 }
+
+.block-quick-image {
+    margin: 0;
+}
+
+.block-quick-image img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 0.5rem;
+}
+
+.block-quick-image--img-thumbnail img {
+    border: 1px solid #e6e9ec;
+    padding: 0.5rem;
+    background: #fff;
+}

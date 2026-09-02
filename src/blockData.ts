@@ -1,11 +1,14 @@
 import type { BlockData, FieldValue } from '@ibexa/react-headless';
 
 import { loadContentListItems } from '#/blocks/ContentListBlock';
+import { loadQuickImage } from '#/blocks/QuickImageBlock';
 
 export type BlockWithData = BlockData & { data?: unknown };
 
 const BLOCK_DATA_LOADERS: Record<string, ((block: BlockData) => Promise<unknown>) | undefined> = {
     contentlist: loadContentListItems,
+    // eslint-disable-next-line camelcase
+    quick_image: loadQuickImage,
 };
 
 export const loadBlockData = async (fieldValue: FieldValue): Promise<FieldValue> => {
