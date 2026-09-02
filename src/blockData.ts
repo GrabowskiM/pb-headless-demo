@@ -1,12 +1,14 @@
 import type { BlockData, FieldValue } from '@ibexa/react-headless';
 
 import { loadContentListItems } from '#/blocks/ContentListBlock';
+import { loadGalleryImages } from '#/blocks/GalleryBlock';
 import { loadQuickImage } from '#/blocks/QuickImageBlock';
 
 export type BlockWithData = BlockData & { data?: unknown };
 
 const BLOCK_DATA_LOADERS: Record<string, ((block: BlockData) => Promise<unknown>) | undefined> = {
     contentlist: loadContentListItems,
+    gallery: loadGalleryImages,
     // eslint-disable-next-line camelcase
     quick_image: loadQuickImage,
 };
