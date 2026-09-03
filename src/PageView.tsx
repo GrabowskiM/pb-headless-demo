@@ -1,11 +1,9 @@
-import '@ibexa/react-headless/styles/editorial-mode.css';
 import '@ibexa/react-headless/styles/preview.css';
 
 import { LandingPage, useFieldValue } from '@ibexa/react-headless';
 
 import type { FieldValue } from '@ibexa/react-headless';
 import { PbDiagnostics } from '#/PbDiagnostics';
-import { PbHandshake } from '#/PbHandshake';
 import { blockComponents } from '#/blocks';
 import { resolveLayout } from '#/layouts';
 
@@ -34,7 +32,6 @@ const Zones = () => {
 export const PageView = ({ fieldValue }: PageViewProps) => (
     <LandingPage blockComponents={blockComponents} fieldValue={fieldValue ?? undefined} origin={PB_ORIGIN}>
         <Zones />
-        {fieldValue === null ? <PbHandshake origin={PB_ORIGIN} /> : null}
         {fieldValue === null ? <PbDiagnostics origin={PB_ORIGIN} /> : null}
     </LandingPage>
 );
