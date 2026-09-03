@@ -79,8 +79,6 @@ export const loadContentListItems = async (block: BlockData): Promise<ContentLis
         method: 'POST',
     });
 
-    console.log(view.View.Result.searchHits.searchHit);
-
     return view.View.Result.searchHits.searchHit.map(({ value }) => {
         const { CurrentVersion, TranslatedName, _id } = value.Content;
 
