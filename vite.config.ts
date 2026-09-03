@@ -6,6 +6,7 @@ import viteReact from '@vitejs/plugin-react'
 
 const config = defineConfig({
   resolve: { tsconfigPaths: true },
+  ssr: { noExternal: true },
   plugins: [tanstackStart(), viteReact()],
 })
 
