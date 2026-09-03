@@ -1,5 +1,6 @@
 import { createServer } from 'node:http';
 import { readFile, stat } from 'node:fs/promises';
+import { rmSync } from 'node:fs';
 import { extname, join, normalize } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { Readable } from 'node:stream';
@@ -10,6 +11,7 @@ const ROOT = fileURLToPath(new URL('.', import.meta.url));
 const CLIENT_DIR = join(ROOT, 'dist', 'client');
 const PORT = Number(process.env.PORT ?? 3000);
 const HOST = process.env.HOST ?? '0.0.0.0';
+const SOCKET = process.env.SOCKET;
 
 const MIME = {
     '.js': 'text/javascript',
@@ -87,6 +89,18 @@ const server = createServer((req, res) => {
     })();
 });
 
-server.listen(PORT, HOST, () => {
-    console.log(`Listening on http://${HOST}:${PORT}`);
-});
+if (SOCKET) {
+    try {
+        rmSync(SOCKET);
+    } catch {
+        // no stale socket to remove
+    }
+
+    server.listen(SOCKET, () => {
+        console.log(`Listening on unix socket ${SOCKET}`);
+    });
+} else {
+    server.listen(PORT, HOST, () => {
+        console.log(`Listening on http://${HOST}:${PORT}`);
+    });
+}

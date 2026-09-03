@@ -10,7 +10,7 @@ web:
     commands:
         start: 'node serve.mjs'
     upstream:
-        socket_family: tcp
+        socket_family: unix
     locations:
         '/':
             passthru: true
