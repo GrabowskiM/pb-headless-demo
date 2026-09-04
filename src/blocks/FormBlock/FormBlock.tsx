@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
 import type { BlockWithData } from '#/blockData';
+import { useBlockData } from '#/blockDataContext';
 
 import type { FormDefinition, FormField } from './loadForm';
 
@@ -39,11 +40,13 @@ const FieldControl = ({ field }: { field: FormField }) => {
 export const FormBlock = ({ block }: FormBlockProps) => {
     const [submitted, setSubmitted] = useState(false);
 
-    if (!isFormDefinition(block.data)) {
+    const data = useBlockData(block);
+
+    if (!isFormDefinition(data)) {
         return null;
     }
 
-    const { fields, submitLabel, successMessage } = block.data;
+    const { fields, submitLabel, successMessage } = data;
 
     return (
         <form

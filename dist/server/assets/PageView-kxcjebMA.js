@@ -1,6 +1,7 @@
 import { a as __toESM, t as require_jsx_runtime } from "./jsx-runtime-CsSE45fb.js";
 import { t as require_react } from "./react-C9I8DVWd.js";
-import { a as attribute, i as ContentListBlock, n as GalleryBlock, r as FormBlock, t as QuickImageBlock } from "./QuickImageBlock-SdYG9OB3.js";
+import { c as ContentListBlock, i as GalleryBlock, l as attribute, n as QuickImageBlock, o as FormBlock, u as BlockDataContext } from "./QuickImageBlock-BIANY00c.js";
+import { t as fetchBlockData } from "./blockData-CC4ebmTz.js";
 //#region node_modules/react-error-boundary/dist/react-error-boundary.js
 var import_react = /* @__PURE__ */ __toESM(require_react(), 1);
 var h$1 = (0, import_react.createContext)(null);
@@ -615,11 +616,33 @@ var Zones = () => {
 	const Layout = resolveLayout(data.layout);
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("main", { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Layout, { zones: data.zones }) });
 };
+var BlockDataProvider = ({ children }) => {
+	const isPBMode = x();
+	const fieldValue = X();
+	const [blockData, setBlockData] = (0, import_react.useState)({});
+	(0, import_react.useEffect)(() => {
+		if (!isPBMode || !fieldValue) return;
+		let active = true;
+		fetchBlockData({ data: fieldValue }).then((enriched) => {
+			if (!active) return;
+			const map = {};
+			for (const zone of enriched.zones) for (const block of zone.blocks) if (block.data !== void 0) map[block.id] = block.data;
+			setBlockData(map);
+		});
+		return () => {
+			active = false;
+		};
+	}, [isPBMode, fieldValue]);
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(BlockDataContext.Provider, {
+		value: blockData,
+		children
+	});
+};
 var PageView = ({ fieldValue }) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(J, {
 	blockComponents,
 	fieldValue: fieldValue ?? void 0,
 	origin: PB_ORIGIN,
-	children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Zones, {})
+	children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(BlockDataProvider, { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Zones, {}) })
 });
 //#endregion
 export { PageView as t };

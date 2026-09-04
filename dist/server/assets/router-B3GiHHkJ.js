@@ -1,11 +1,12 @@
 import { a as __toESM, r as __exportAll, t as require_jsx_runtime } from "./jsx-runtime-CsSE45fb.js";
 import { t as require_react } from "./react-C9I8DVWd.js";
 import { n as notFound } from "./not-found-8nHLrNYc.js";
-import { R as escapeHtml, c as useRouter, d as useHydrated } from "./__23tanstack-start-server-fn-resolver-B_Wf5JIL.js";
+import { L as escapeHtml, s as useRouter, u as useHydrated } from "./request-response-CUBnbgfo.js";
 import { t as createServerFn } from "./createServerFn-CLui4yE9.js";
-import { a as lazyRouteComponent, c as Link, i as createSsrRpc, n as loadPageFieldValueByAlias, o as createFileRoute, r as isFramed, s as createRootRoute, t as loadPageFieldValue } from "./pageFieldValue-CyEEKn49.js";
-import { a as resolveManifestCssLink, c as createNonReactiveMutableStore, i as getScriptPreloadAttrs, l as createNonReactiveReadonlyStore, n as appendUniqueUserTags, o as _getAssetMatches, r as getAssetCrossOrigin, s as RouterCore, t as Outlet } from "../server.js";
+import { a as createFileRoute, i as lazyRouteComponent, n as loadPageFieldValueByAlias, o as createRootRoute, r as isFramed, s as Link, t as loadPageFieldValue } from "./pageFieldValue-D60hE7Tm.js";
+import { a as getScriptPreloadAttrs, c as RouterCore, i as getAssetCrossOrigin, l as createNonReactiveMutableStore, n as Outlet, o as resolveManifestCssLink, r as appendUniqueUserTags, s as _getAssetMatches, u as createNonReactiveReadonlyStore } from "../server.js";
 import { t as RestError } from "./rest-CUNAaj83.js";
+import { t as createSsrRpc } from "./createSsrRpc-DElj1GQc.js";
 //#region node_modules/@tanstack/store/dist/esm/alien.js
 var ReactiveFlags = /* @__PURE__ */ ((ReactiveFlags2) => {
 	ReactiveFlags2[ReactiveFlags2["None"] = 0] = "None";
@@ -662,14 +663,14 @@ var Route$3 = createRootRoute({
 });
 //#endregion
 //#region src/routes/index.tsx
-var $$splitComponentImporter$2 = () => import("./routes-Cw2WkPsQ.js");
+var $$splitComponentImporter$2 = () => import("./routes-arS5lgOH.js");
 var Route$2 = createFileRoute("/")({
 	component: lazyRouteComponent($$splitComponentImporter$2, "component"),
 	loader: () => isFramed() ? null : loadPageFieldValue()
 });
 //#endregion
 //#region src/routes/$.tsx
-var $$splitComponentImporter$1 = () => import("./_-gG0ig1U3.js");
+var $$splitComponentImporter$1 = () => import("./_-BG2TBWYW.js");
 var NOT_FOUND = 404;
 var Route$1 = createFileRoute("/$")({
 	component: lazyRouteComponent($$splitComponentImporter$1, "component"),

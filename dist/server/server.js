@@ -1,7 +1,7 @@
 import { a as __toESM, i as __require, n as __commonJSMin, t as require_jsx_runtime } from "./assets/jsx-runtime-CsSE45fb.js";
 import { t as require_react } from "./assets/react-C9I8DVWd.js";
 import { t as isNotFound } from "./assets/not-found-8nHLrNYc.js";
-import { A as processRouteTree, B as hasKeys, D as findRouteMatch, E as findFlatMatch, F as decodePath, G as replaceEqualDeep, I as deepEqual, K as rootRouteId, L as encodePathLikeUrl, M as createLRUCache, N as DEFAULT_PROTOCOL_ALLOWLIST, O as findSingleMatch, P as arraysEqual, R as escapeHtml, S as trimPath, T as buildRouteBranch, U as last, V as isDangerousProtocol, W as nullReplaceEqualDeep, c as useRouter, g as compileDecodeCharMap, h as useLayoutEffect, i as requestHandler, j as invariant, k as processRouteMasks, l as routerContext, r as getResponse, s as matchContext, t as getServerFnById, u as ClientOnly, v as interpolatePath, w as trimPathRight, x as resolvePath, y as joinPaths, z as functionalUpdate } from "./assets/__23tanstack-start-server-fn-resolver-B_Wf5JIL.js";
+import { A as invariant, B as isDangerousProtocol, C as trimPathRight, D as findSingleMatch, E as findRouteMatch, F as deepEqual, G as rootRouteId, H as last, I as encodePathLikeUrl, L as escapeHtml, M as DEFAULT_PROTOCOL_ALLOWLIST, N as arraysEqual, O as processRouteMasks, P as decodePath, R as functionalUpdate, T as findFlatMatch, U as nullReplaceEqualDeep, W as replaceEqualDeep, _ as interpolatePath, b as resolvePath, c as routerContext, h as compileDecodeCharMap, j as createLRUCache, k as processRouteTree, l as ClientOnly, m as useLayoutEffect, n as getResponse, o as matchContext, r as requestHandler, s as useRouter, v as joinPaths, w as buildRouteBranch, x as trimPath, z as hasKeys } from "./assets/request-response-CUBnbgfo.js";
 import { _ as redirect, a as runWithStartContext, c as FrameType, d as TSS_SERVER_FUNCTION, f as X_TSS_RAW_RESPONSE, g as isResolvedRedirect, h as isRedirect, i as getStartContext, l as TSS_CONTENT_TYPE_FRAMED_VERSIONED, m as mergeHeaders, n as flattenMiddlewares, o as createNullProtoObject, p as X_TSS_SERIALIZED, r as getStartOptions, s as safeObjectMerge, u as TSS_FORMDATA_CONTEXT } from "./assets/createServerFn-CLui4yE9.js";
 import { ReadableStream as ReadableStream$1 } from "node:stream/web";
 import { PassThrough, Readable } from "node:stream";
@@ -15893,7 +15893,7 @@ var HEADERS = { TSS_SHELL: "X-TSS_SHELL" };
 * the dev styles URL for route-scoped CSS collection.
 */
 async function getStartManifest(matchedRoutes) {
-	const { tsrStartManifest } = await import("./assets/_tanstack-start-manifest_v-Cq3f_46i.js");
+	const { tsrStartManifest } = await import("./assets/_tanstack-start-manifest_v-Dbmm6qZj.js");
 	const startManifest = tsrStartManifest();
 	let routes = startManifest.routes;
 	routes[rootRouteId];
@@ -15911,6 +15911,35 @@ async function getStartManifest(matchedRoutes) {
 		...startManifest.inlineCss ? { inlineCss: startManifest.inlineCss } : {},
 		routes: manifestRoutes
 	};
+}
+//#endregion
+//#region \0%23tanstack-start-server-fn-resolver
+var manifest = {
+	"07eaaa8722eb33ae3203c7ddbb91f9570511c76396cb4453a0eb29744d462b10": {
+		functionName: "loadPageFieldValue_createServerFn_handler",
+		importer: () => import("./assets/pageFieldValue-DOJV8lBe.js")
+	},
+	"8548759e084dbbea5d3a91d40f15ab9de856185e1e79112e342011640da90c1a": {
+		functionName: "loadMenu_createServerFn_handler",
+		importer: () => import("./assets/menu-CbNVNVT9.js")
+	},
+	"aabbd2620dee9144e9d8a08b72556f5a4a0a0965cfe58cfcbe9ff12e6cd02278": {
+		functionName: "loadPageFieldValueByAlias_createServerFn_handler",
+		importer: () => import("./assets/pageFieldValue-DOJV8lBe.js")
+	},
+	"d824a6e7846707f533526e40e84a19414d341867c98fb84d04d6238afa00b19c": {
+		functionName: "fetchBlockData_createServerFn_handler",
+		importer: () => import("./assets/blockData-BPpno8eJ.js")
+	}
+};
+async function getServerFnById(id, access) {
+	const serverFnInfo = manifest[id];
+	if (!serverFnInfo) throw new Error("Server function info not found for " + id);
+	const fnModule = serverFnInfo.module ?? await serverFnInfo.importer();
+	if (!fnModule) throw new Error("Server function module not resolved for " + id);
+	const action = fnModule[serverFnInfo.functionName];
+	if (!action) throw new Error("Server function module export not resolved for serverFn ID: " + id);
+	return action;
 }
 //#endregion
 //#region node_modules/@tanstack/start-client-core/dist/esm/createMiddleware.js
@@ -16937,7 +16966,7 @@ var getBaseManifest = getProdBaseManifest;
 var createEarlyHintsForRequest = createEarlyHintsCollector;
 async function loadEntries() {
 	const [routerEntry, startEntry, pluginAdapters] = await Promise.all([
-		import("./assets/router-3NgpNm9q.js").then((n) => n.t),
+		import("./assets/router-B3GiHHkJ.js").then((n) => n.t),
 		import("./assets/start-5Z2QO8AU.js"),
 		import("./assets/empty-plugin-adapters-D9UWiqvJ.js")
 	]);
@@ -17385,4 +17414,4 @@ function createServerEntry(entry) {
 }
 var server_default = createServerEntry({ fetch });
 //#endregion
-export { resolveManifestCssLink as a, createNonReactiveMutableStore as c, createServerEntry, server_default as default, getScriptPreloadAttrs as i, createNonReactiveReadonlyStore as l, appendUniqueUserTags as n, _getAssetMatches as o, getAssetCrossOrigin as r, RouterCore as s, Outlet as t };
+export { getScriptPreloadAttrs as a, RouterCore as c, createServerEntry, server_default as default, getAssetCrossOrigin as i, createNonReactiveMutableStore as l, Outlet as n, resolveManifestCssLink as o, appendUniqueUserTags as r, _getAssetMatches as s, getServerFnById as t, createNonReactiveReadonlyStore as u };

@@ -2081,29 +2081,4 @@ function getResponse() {
 	return getH3Event().res;
 }
 //#endregion
-//#region \0%23tanstack-start-server-fn-resolver
-var manifest = {
-	"07eaaa8722eb33ae3203c7ddbb91f9570511c76396cb4453a0eb29744d462b10": {
-		functionName: "loadPageFieldValue_createServerFn_handler",
-		importer: () => import("./pageFieldValue-wY_tnQ2d.js")
-	},
-	"8548759e084dbbea5d3a91d40f15ab9de856185e1e79112e342011640da90c1a": {
-		functionName: "loadMenu_createServerFn_handler",
-		importer: () => import("./menu-CbNVNVT9.js")
-	},
-	"aabbd2620dee9144e9d8a08b72556f5a4a0a0965cfe58cfcbe9ff12e6cd02278": {
-		functionName: "loadPageFieldValueByAlias_createServerFn_handler",
-		importer: () => import("./pageFieldValue-wY_tnQ2d.js")
-	}
-};
-async function getServerFnById(id, access) {
-	const serverFnInfo = manifest[id];
-	if (!serverFnInfo) throw new Error("Server function info not found for " + id);
-	const fnModule = serverFnInfo.module ?? await serverFnInfo.importer();
-	if (!fnModule) throw new Error("Server function module not resolved for " + id);
-	const action = fnModule[serverFnInfo.functionName];
-	if (!action) throw new Error("Server function module export not resolved for serverFn ID: " + id);
-	return action;
-}
-//#endregion
-export { processRouteTree as A, hasKeys as B, trimPathLeft as C, findRouteMatch as D, findFlatMatch as E, decodePath as F, replaceEqualDeep as G, isModuleNotFoundError as H, deepEqual as I, rootRouteId as K, encodePathLikeUrl as L, createLRUCache as M, DEFAULT_PROTOCOL_ALLOWLIST as N, findSingleMatch as O, arraysEqual as P, escapeHtml as R, trimPath as S, buildRouteBranch as T, last as U, isDangerousProtocol as V, nullReplaceEqualDeep as W, exactPathTest as _, useStore as a, removeTrailingSlash as b, useRouter as c, useHydrated as d, reactUse as f, compileDecodeCharMap as g, useLayoutEffect as h, requestHandler as i, invariant as j, processRouteMasks as k, routerContext as l, useIntersectionObserver as m, getRequestHeader as n, dummyMatchContext as o, useForwardedRef as p, getResponse as r, matchContext as s, getServerFnById as t, ClientOnly as u, interpolatePath as v, trimPathRight as w, resolvePath as x, joinPaths as y, functionalUpdate as z };
+export { invariant as A, isDangerousProtocol as B, trimPathRight as C, findSingleMatch as D, findRouteMatch as E, deepEqual as F, rootRouteId as G, last as H, encodePathLikeUrl as I, escapeHtml as L, DEFAULT_PROTOCOL_ALLOWLIST as M, arraysEqual as N, processRouteMasks as O, decodePath as P, functionalUpdate as R, trimPathLeft as S, findFlatMatch as T, nullReplaceEqualDeep as U, isModuleNotFoundError as V, replaceEqualDeep as W, interpolatePath as _, dummyMatchContext as a, resolvePath as b, routerContext as c, reactUse as d, useForwardedRef as f, exactPathTest as g, compileDecodeCharMap as h, useStore as i, createLRUCache as j, processRouteTree as k, ClientOnly as l, useLayoutEffect as m, getResponse as n, matchContext as o, useIntersectionObserver as p, requestHandler as r, useRouter as s, getRequestHeader as t, useHydrated as u, joinPaths as v, buildRouteBranch as w, trimPath as x, removeTrailingSlash as y, hasKeys as z };

@@ -1,4 +1,5 @@
 import type { BlockWithData } from '#/blockData';
+import { useBlockData } from '#/blockDataContext';
 
 import type { ContentListItem } from './loadContentListItems';
 import { PersonCard } from './PersonCard';
@@ -13,7 +14,8 @@ const PERSON_CONTENT_TYPE = 'person';
 const isContentListItems = (value: unknown): value is ContentListItem[] => Array.isArray(value);
 
 export const ContentListBlock = ({ block }: ContentListBlockProps) => {
-    const items = isContentListItems(block.data) ? block.data : [];
+    const data = useBlockData(block);
+    const items = isContentListItems(data) ? data : [];
     const isPersonList = attribute(block, 'contentType') === PERSON_CONTENT_TYPE;
 
     return (

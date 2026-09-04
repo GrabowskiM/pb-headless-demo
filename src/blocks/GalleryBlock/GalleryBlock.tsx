@@ -1,4 +1,5 @@
 import type { BlockWithData } from '#/blockData';
+import { useBlockData } from '#/blockDataContext';
 
 import type { GalleryImage } from './loadGalleryImages';
 
@@ -9,7 +10,8 @@ interface GalleryBlockProps {
 const isGalleryImages = (value: unknown): value is GalleryImage[] => Array.isArray(value);
 
 export const GalleryBlock = ({ block }: GalleryBlockProps) => {
-    const images = isGalleryImages(block.data) ? block.data : [];
+    const data = useBlockData(block);
+    const images = isGalleryImages(data) ? data : [];
 
     if (images.length === 0) {
         return null;

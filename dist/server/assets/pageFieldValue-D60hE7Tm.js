@@ -1,7 +1,8 @@
 import { a as __toESM, t as require_jsx_runtime } from "./jsx-runtime-CsSE45fb.js";
 import { t as require_react } from "./react-C9I8DVWd.js";
-import { B as hasKeys, C as trimPathLeft, H as isModuleNotFoundError, I as deepEqual, K as rootRouteId, V as isDangerousProtocol, _ as exactPathTest, b as removeTrailingSlash, c as useRouter, f as reactUse, j as invariant, n as getRequestHeader, o as dummyMatchContext, p as useForwardedRef, s as matchContext, t as getServerFnById, w as trimPathRight, y as joinPaths, z as functionalUpdate } from "./__23tanstack-start-server-fn-resolver-B_Wf5JIL.js";
-import { _ as redirect, d as TSS_SERVER_FUNCTION, t as createServerFn } from "./createServerFn-CLui4yE9.js";
+import { A as invariant, B as isDangerousProtocol, C as trimPathRight, F as deepEqual, G as rootRouteId, R as functionalUpdate, S as trimPathLeft, V as isModuleNotFoundError, a as dummyMatchContext, d as reactUse, f as useForwardedRef, g as exactPathTest, o as matchContext, s as useRouter, t as getRequestHeader, v as joinPaths, y as removeTrailingSlash, z as hasKeys } from "./request-response-CUBnbgfo.js";
+import { _ as redirect, t as createServerFn } from "./createServerFn-CLui4yE9.js";
+import { t as createSsrRpc } from "./createSsrRpc-DElj1GQc.js";
 //#endregion
 //#region node_modules/@tanstack/router-core/dist/esm/route.js
 var BaseRoute = class {
@@ -619,20 +620,6 @@ function lazyRouteComponent(importer, exportName) {
 	return lazyComp;
 }
 //#endregion
-//#region node_modules/@tanstack/start-server-core/dist/esm/createSsrRpc.js
-var createSsrRpc = (functionId) => {
-	const url = "/_serverFn/" + functionId;
-	const serverFnMeta = { id: functionId };
-	const fn = async (...args) => {
-		return (await getServerFnById(functionId, { origin: "server" }))(...args);
-	};
-	return Object.assign(fn, {
-		url,
-		serverFnMeta,
-		[TSS_SERVER_FUNCTION]: true
-	});
-};
-//#endregion
 //#region src/isFramed.ts
 var isFramed = () => getRequestHeader("sec-fetch-dest") === "iframe";
 //#endregion
@@ -640,4 +627,4 @@ var isFramed = () => getRequestHeader("sec-fetch-dest") === "iframe";
 var loadPageFieldValue = createServerFn().handler(createSsrRpc("07eaaa8722eb33ae3203c7ddbb91f9570511c76396cb4453a0eb29744d462b10"));
 var loadPageFieldValueByAlias = createServerFn().validator((alias) => alias).handler(createSsrRpc("aabbd2620dee9144e9d8a08b72556f5a4a0a0965cfe58cfcbe9ff12e6cd02278"));
 //#endregion
-export { lazyRouteComponent as a, Link as c, createSsrRpc as i, loadPageFieldValueByAlias as n, createFileRoute as o, isFramed as r, createRootRoute as s, loadPageFieldValue as t };
+export { createFileRoute as a, lazyRouteComponent as i, loadPageFieldValueByAlias as n, createRootRoute as o, isFramed as r, Link as s, loadPageFieldValue as t };

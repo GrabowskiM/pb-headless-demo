@@ -1,1 +1,0 @@
-import{n as e,r as t}from"./index-D1gJjZe3.js";import{t as n}from"./PageView-CI4qChhw.js";var r=t(),i=()=>(0,r.jsx)(n,{fieldValue:e.useLoaderData()});export{i as component};
