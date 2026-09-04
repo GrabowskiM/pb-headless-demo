@@ -9,6 +9,7 @@
     "dev": "vite dev --port 3000",
     "generate-routes": "tsr generate",
     "build": "vite build",
+    "start": "node serve.mjs",
     "preview": "vite preview",
     "prettier:check": "prettier \"./src/**/*.{ts,tsx,css}\" --check",
     "prettier:fix": "npm run prettier:check -- --write",
