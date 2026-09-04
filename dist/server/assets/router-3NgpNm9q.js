@@ -1,8 +1,11 @@
 import { a as __toESM, r as __exportAll, t as require_jsx_runtime } from "./jsx-runtime-CsSE45fb.js";
-import { L as escapeHtml, Y as require_react, s as useRouter, u as useHydrated } from "./request-response-BnN-tzoE.js";
+import { t as require_react } from "./react-C9I8DVWd.js";
 import { n as notFound } from "./not-found-8nHLrNYc.js";
-import { c as isFramed, d as lazyRouteComponent, f as createFileRoute, l as RestError, m as Link, n as loadPageFieldValueByAlias, p as createRootRoute, t as loadPageFieldValue, u as restFetch } from "./pageFieldValue-B8aS3A9a.js";
+import { R as escapeHtml, c as useRouter, d as useHydrated } from "./__23tanstack-start-server-fn-resolver-B_Wf5JIL.js";
+import { t as createServerFn } from "./createServerFn-CLui4yE9.js";
+import { a as lazyRouteComponent, c as Link, i as createSsrRpc, n as loadPageFieldValueByAlias, o as createFileRoute, r as isFramed, s as createRootRoute, t as loadPageFieldValue } from "./pageFieldValue-CyEEKn49.js";
 import { a as resolveManifestCssLink, c as createNonReactiveMutableStore, i as getScriptPreloadAttrs, l as createNonReactiveReadonlyStore, n as appendUniqueUserTags, o as _getAssetMatches, r as getAssetCrossOrigin, s as RouterCore, t as Outlet } from "../server.js";
+import { t as RestError } from "./rest-CUNAaj83.js";
 //#region node_modules/@tanstack/store/dist/esm/alien.js
 var ReactiveFlags = /* @__PURE__ */ ((ReactiveFlags2) => {
 	ReactiveFlags2[ReactiveFlags2["None"] = 0] = "None";
@@ -534,38 +537,7 @@ function renderScripts(router, scripts) {
 }
 //#endregion
 //#region src/menu.ts
-var MENU_PARENT_LOCATION_ID = 431;
-var MENU_CONTENT_TYPE = "headless_landing_page";
-var MENU_LIMIT = 50;
-var hasAlias = (item) => item.href !== null;
-var loadCustomAliasPath = async (locationHref) => {
-	const ref = (await restFetch(`${locationHref}/urlaliases`, "application/vnd.ibexa.api.UrlAliasRefList+json")).UrlAliasRefList.UrlAlias.at(0);
-	if (!ref) return null;
-	return (await restFetch(ref._href, "application/vnd.ibexa.api.UrlAlias+json")).UrlAlias.path;
-};
-var locationId = (href) => Number(href.split("/").pop());
-var loadMenu = async () => {
-	const { View } = await restFetch("/api/ibexa/v2/views", "application/vnd.ibexa.api.View+json", {
-		body: JSON.stringify({ ViewInput: {
-			Query: {
-				Filter: {
-					ContentTypeIdentifierCriterion: [MENU_CONTENT_TYPE],
-					ParentLocationIdCriterion: MENU_PARENT_LOCATION_ID
-				},
-				limit: MENU_LIMIT
-			},
-			identifier: "top-menu",
-			public: false
-		} }),
-		headers: { "Content-Type": "application/vnd.ibexa.api.ViewInput+json" },
-		method: "POST"
-	});
-	return (await Promise.all(View.Result.searchHits.searchHit.map(({ value }) => value.Content).filter((content) => !content.isHidden).map(async (content) => ({
-		href: await loadCustomAliasPath(content.MainLocation._href),
-		id: locationId(content.MainLocation._href),
-		name: content.TranslatedName
-	})))).filter(hasAlias).sort((first, second) => first.id - second.id);
-};
+var loadMenu = createServerFn().handler(createSsrRpc("8548759e084dbbea5d3a91d40f15ab9de856185e1e79112e342011640da90c1a"));
 //#endregion
 //#region src/styles.css?url
 var styles_default = "/assets/styles-BNumSRKt.css";
@@ -690,21 +662,21 @@ var Route$3 = createRootRoute({
 });
 //#endregion
 //#region src/routes/index.tsx
-var $$splitComponentImporter$2 = () => import("./routes-CgtFABxy.js");
+var $$splitComponentImporter$2 = () => import("./routes-Cw2WkPsQ.js");
 var Route$2 = createFileRoute("/")({
 	component: lazyRouteComponent($$splitComponentImporter$2, "component"),
 	loader: () => isFramed() ? null : loadPageFieldValue()
 });
 //#endregion
 //#region src/routes/$.tsx
-var $$splitComponentImporter$1 = () => import("./_-DXTZAyO_.js");
+var $$splitComponentImporter$1 = () => import("./_-gG0ig1U3.js");
 var NOT_FOUND = 404;
 var Route$1 = createFileRoute("/$")({
 	component: lazyRouteComponent($$splitComponentImporter$1, "component"),
 	loader: async ({ params }) => {
 		if (isFramed()) return null;
 		try {
-			return await loadPageFieldValueByAlias(`/${params._splat ?? ""}`);
+			return await loadPageFieldValueByAlias({ data: `/${params._splat ?? ""}` });
 		} catch (error) {
 			if (error instanceof RestError && error.status === NOT_FOUND) throw notFound();
 			throw error;

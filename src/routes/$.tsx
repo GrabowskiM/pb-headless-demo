@@ -17,7 +17,7 @@ export const Route = createFileRoute('/$')({
         }
 
         try {
-            return await loadPageFieldValueByAlias(`/${params._splat ?? ''}`);
+            return await loadPageFieldValueByAlias({ data: `/${params._splat ?? ''}` });
         } catch (error) {
             if (error instanceof RestError && error.status === NOT_FOUND) {
                 // eslint-disable-next-line @typescript-eslint/only-throw-error

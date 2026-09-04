@@ -1,9 +1,10 @@
 import { a as __toESM, i as __require, n as __commonJSMin, t as require_jsx_runtime } from "./assets/jsx-runtime-CsSE45fb.js";
-import { A as invariant, B as isDangerousProtocol, C as trimPathRight, D as findSingleMatch, E as findRouteMatch, F as deepEqual, G as isRedirect, H as last, I as encodePathLikeUrl, J as rootRouteId, K as isResolvedRedirect, L as escapeHtml, M as DEFAULT_PROTOCOL_ALLOWLIST, N as arraysEqual, O as processRouteMasks, P as decodePath, R as functionalUpdate, T as findFlatMatch, U as nullReplaceEqualDeep, W as replaceEqualDeep, Y as require_react, _ as interpolatePath, b as resolvePath, c as routerContext, h as compileDecodeCharMap, j as createLRUCache, k as processRouteTree, l as ClientOnly, m as useLayoutEffect, n as getResponse, o as matchContext, q as redirect, r as requestHandler, s as useRouter, v as joinPaths, w as buildRouteBranch, x as trimPath, z as hasKeys } from "./assets/request-response-BnN-tzoE.js";
+import { t as require_react } from "./assets/react-C9I8DVWd.js";
 import { t as isNotFound } from "./assets/not-found-8nHLrNYc.js";
+import { A as processRouteTree, B as hasKeys, D as findRouteMatch, E as findFlatMatch, F as decodePath, G as replaceEqualDeep, I as deepEqual, K as rootRouteId, L as encodePathLikeUrl, M as createLRUCache, N as DEFAULT_PROTOCOL_ALLOWLIST, O as findSingleMatch, P as arraysEqual, R as escapeHtml, S as trimPath, T as buildRouteBranch, U as last, V as isDangerousProtocol, W as nullReplaceEqualDeep, c as useRouter, g as compileDecodeCharMap, h as useLayoutEffect, i as requestHandler, j as invariant, k as processRouteMasks, l as routerContext, r as getResponse, s as matchContext, t as getServerFnById, u as ClientOnly, v as interpolatePath, w as trimPathRight, x as resolvePath, y as joinPaths, z as functionalUpdate } from "./assets/__23tanstack-start-server-fn-resolver-B_Wf5JIL.js";
+import { _ as redirect, a as runWithStartContext, c as FrameType, d as TSS_SERVER_FUNCTION, f as X_TSS_RAW_RESPONSE, g as isResolvedRedirect, h as isRedirect, i as getStartContext, l as TSS_CONTENT_TYPE_FRAMED_VERSIONED, m as mergeHeaders, n as flattenMiddlewares, o as createNullProtoObject, p as X_TSS_SERIALIZED, r as getStartOptions, s as safeObjectMerge, u as TSS_FORMDATA_CONTEXT } from "./assets/createServerFn-CLui4yE9.js";
 import { ReadableStream as ReadableStream$1 } from "node:stream/web";
 import { PassThrough, Readable } from "node:stream";
-import { AsyncLocalStorage } from "node:async_hooks";
 //#region node_modules/@tanstack/router-core/dist/esm/ssr/ssr-match-id.js
 function dehydrateSsrMatchId(id) {
 	return id.replaceAll("~", "~~").replaceAll("\0", "~0").replaceAll("�", "~r").replaceAll("/", "\0");
@@ -15102,66 +15103,6 @@ function defineHandlerCallback(handler) {
 	return handler;
 }
 //#endregion
-//#region node_modules/cookie-es/dist/index.mjs
-function splitSetCookieString(cookiesString) {
-	if (Array.isArray(cookiesString)) return cookiesString.flatMap((c) => splitSetCookieString(c));
-	if (typeof cookiesString !== "string") return [];
-	const cookiesStrings = [];
-	let pos = 0;
-	let start;
-	let ch;
-	let lastComma;
-	let nextStart;
-	let cookiesSeparatorFound;
-	const skipWhitespace = () => {
-		while (pos < cookiesString.length && /\s/.test(cookiesString.charAt(pos))) pos += 1;
-		return pos < cookiesString.length;
-	};
-	const notSpecialChar = () => {
-		ch = cookiesString.charAt(pos);
-		return ch !== "=" && ch !== ";" && ch !== ",";
-	};
-	while (pos < cookiesString.length) {
-		start = pos;
-		cookiesSeparatorFound = false;
-		while (skipWhitespace()) {
-			ch = cookiesString.charAt(pos);
-			if (ch === ",") {
-				lastComma = pos;
-				pos += 1;
-				skipWhitespace();
-				nextStart = pos;
-				while (pos < cookiesString.length && notSpecialChar()) pos += 1;
-				if (pos < cookiesString.length && cookiesString.charAt(pos) === "=") {
-					cookiesSeparatorFound = true;
-					pos = nextStart;
-					cookiesStrings.push(cookiesString.slice(start, lastComma));
-					start = pos;
-				} else pos = lastComma + 1;
-			} else pos += 1;
-		}
-		if (!cookiesSeparatorFound || pos >= cookiesString.length) cookiesStrings.push(cookiesString.slice(start));
-	}
-	return cookiesStrings;
-}
-//#endregion
-//#region node_modules/@tanstack/router-core/dist/esm/ssr/headers.js
-function toHeadersInstance(init) {
-	if (init instanceof Headers) return init;
-	else if (Array.isArray(init)) return new Headers(init);
-	else if (typeof init === "object") return new Headers(init);
-	else return null;
-}
-function mergeHeaders(...headers) {
-	return headers.reduce((acc, header) => {
-		const headersInstance = toHeadersInstance(header);
-		if (!headersInstance) return acc;
-		for (const [key, value] of headersInstance.entries()) if (key === "set-cookie") splitSetCookieString(value).forEach((cookie) => acc.append("set-cookie", cookie));
-		else acc.set(key, value);
-		return acc;
-	}, new Headers());
-}
-//#endregion
 //#region node_modules/@tanstack/router-core/dist/esm/ssr/createRequestHandler.js
 var requestWaiters = /* @__PURE__ */ new WeakMap();
 function removeRequestWaiter(waiters, index, reject) {
@@ -15952,7 +15893,7 @@ var HEADERS = { TSS_SHELL: "X-TSS_SHELL" };
 * the dev styles URL for route-scoped CSS collection.
 */
 async function getStartManifest(matchedRoutes) {
-	const { tsrStartManifest } = await import("./assets/_tanstack-start-manifest_v-DYqZtTEv.js");
+	const { tsrStartManifest } = await import("./assets/_tanstack-start-manifest_v-Cq3f_46i.js");
 	const startManifest = tsrStartManifest();
 	let routes = startManifest.routes;
 	routes[rootRouteId];
@@ -15970,103 +15911,6 @@ async function getStartManifest(matchedRoutes) {
 		...startManifest.inlineCss ? { inlineCss: startManifest.inlineCss } : {},
 		routes: manifestRoutes
 	};
-}
-//#endregion
-//#region \0%23tanstack-start-server-fn-resolver
-var manifest = {};
-async function getServerFnById(id, access) {
-	const serverFnInfo = manifest[id];
-	if (!serverFnInfo) throw new Error("Server function info not found for " + id);
-	const fnModule = serverFnInfo.module ?? await serverFnInfo.importer();
-	if (!fnModule) throw new Error("Server function module not resolved for " + id);
-	const action = fnModule[serverFnInfo.functionName];
-	if (!action) throw new Error("Server function module export not resolved for serverFn ID: " + id);
-	return action;
-}
-//#endregion
-//#region node_modules/@tanstack/start-client-core/dist/esm/constants.js
-var TSS_FORMDATA_CONTEXT = "__TSS_CONTEXT";
-var TSS_SERVER_FUNCTION = Symbol.for("TSS_SERVER_FUNCTION");
-var X_TSS_SERIALIZED = "x-tss-serialized";
-var X_TSS_RAW_RESPONSE = "x-tss-raw";
-/** Content-Type for multiplexed framed responses (RawStream support) */
-var TSS_CONTENT_TYPE_FRAMED = "application/x-tss-framed";
-/**
-* Frame types for binary multiplexing protocol.
-*/
-var FrameType = {
-	/** Seroval JSON chunk (NDJSON line) */
-	JSON: 0,
-	/** Raw stream data chunk */
-	CHUNK: 1,
-	/** Raw stream end (EOF) */
-	END: 2,
-	/** Raw stream error */
-	ERROR: 3
-};
-/** Full Content-Type header value with version parameter */
-var TSS_CONTENT_TYPE_FRAMED_VERSIONED = `${TSS_CONTENT_TYPE_FRAMED}; v=1`;
-//#endregion
-//#region node_modules/@tanstack/start-client-core/dist/esm/safeObjectMerge.js
-function isSafeKey(key) {
-	return key !== "__proto__" && key !== "constructor" && key !== "prototype";
-}
-/**
-* Merge target and source into a new null-proto object, filtering dangerous keys.
-*/
-function safeObjectMerge(target, source) {
-	const result = Object.create(null);
-	if (target) {
-		for (const key of Object.keys(target)) if (isSafeKey(key)) result[key] = target[key];
-	}
-	if (source && typeof source === "object") {
-		for (const key of Object.keys(source)) if (isSafeKey(key)) result[key] = source[key];
-	}
-	return result;
-}
-/**
-* Create a null-prototype object, optionally copying from source.
-*/
-function createNullProtoObject(source) {
-	if (!source) return Object.create(null);
-	const obj = Object.create(null);
-	for (const key of Object.keys(source)) if (isSafeKey(key)) obj[key] = source[key];
-	return obj;
-}
-//#endregion
-//#region node_modules/@tanstack/start-storage-context/dist/esm/async-local-storage.js
-var GLOBAL_STORAGE_KEY = Symbol.for("tanstack-start:start-storage-context");
-var globalObj = globalThis;
-if (!globalObj[GLOBAL_STORAGE_KEY]) globalObj[GLOBAL_STORAGE_KEY] = new AsyncLocalStorage();
-var startStorage = globalObj[GLOBAL_STORAGE_KEY];
-async function runWithStartContext(context, fn) {
-	return startStorage.run(context, fn);
-}
-function getStartContext(opts) {
-	const context = startStorage.getStore();
-	if (!context && opts?.throwIfNotFound !== false) throw new Error(`No Start context found in AsyncLocalStorage. Make sure you are using the function within the server runtime.`);
-	return context;
-}
-//#endregion
-//#region node_modules/@tanstack/start-client-core/dist/esm/getStartOptions.js
-var getStartOptions = () => getStartContext().startOptions;
-//#endregion
-//#region node_modules/@tanstack/start-client-core/dist/esm/createServerFn.js
-function flattenMiddlewares(middlewares, maxDepth = 100) {
-	const seen = /* @__PURE__ */ new Set();
-	const flattened = [];
-	const recurse = (middleware, depth) => {
-		if (depth > maxDepth) throw new Error(`Middleware nesting depth exceeded maximum of ${maxDepth}. Check for circular references.`);
-		middleware.forEach((m) => {
-			if (m.options.middleware) recurse(m.options.middleware, depth + 1);
-			if (!seen.has(m)) {
-				seen.add(m);
-				flattened.push(m);
-			}
-		});
-	};
-	recurse(middlewares, 0);
-	return flattened;
 }
 //#endregion
 //#region node_modules/@tanstack/start-client-core/dist/esm/createMiddleware.js
@@ -17093,7 +16937,7 @@ var getBaseManifest = getProdBaseManifest;
 var createEarlyHintsForRequest = createEarlyHintsCollector;
 async function loadEntries() {
 	const [routerEntry, startEntry, pluginAdapters] = await Promise.all([
-		import("./assets/router-m3u2fxP0.js").then((n) => n.t),
+		import("./assets/router-3NgpNm9q.js").then((n) => n.t),
 		import("./assets/start-5Z2QO8AU.js"),
 		import("./assets/empty-plugin-adapters-D9UWiqvJ.js")
 	]);

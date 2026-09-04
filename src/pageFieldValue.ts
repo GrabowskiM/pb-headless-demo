@@ -1,3 +1,5 @@
+import { createServerFn } from '@tanstack/react-start';
+
 import type { FieldValue } from '@ibexa/react-headless';
 
 import { loadBlockData } from '#/blockData';
@@ -29,6 +31,8 @@ const loadFieldValue = async (locationQuery: string): Promise<FieldValue> => {
     return loadBlockData(page.fieldValue);
 };
 
-export const loadPageFieldValue = (): Promise<FieldValue> => loadFieldValue(`id=${String(PAGE_LOCATION_ID)}`);
+export const loadPageFieldValue = createServerFn().handler(() => loadFieldValue(`id=${String(PAGE_LOCATION_ID)}`));
 
-export const loadPageFieldValueByAlias = (alias: string): Promise<FieldValue> => loadFieldValue(`urlAlias=${encodeURIComponent(alias)}`);
+export const loadPageFieldValueByAlias = createServerFn()
+    .validator((alias: string) => alias)
+    .handler(({ data }) => loadFieldValue(`urlAlias=${encodeURIComponent(data)}`));

@@ -1,3 +1,5 @@
+import { createServerFn } from '@tanstack/react-start';
+
 import { restFetch } from '#/rest';
 
 const MENU_PARENT_LOCATION_ID = 431;
@@ -55,7 +57,7 @@ const loadCustomAliasPath = async (locationHref: string): Promise<string | null>
 
 const locationId = (href: string): number => Number(href.split('/').pop());
 
-export const loadMenu = async (): Promise<MenuItem[]> => {
+export const loadMenu = createServerFn().handler(async (): Promise<MenuItem[]> => {
     const { View } = await restFetch<ViewResponse>('/api/ibexa/v2/views', 'application/vnd.ibexa.api.View+json', {
         body: JSON.stringify({
             ViewInput: {
@@ -86,4 +88,4 @@ export const loadMenu = async (): Promise<MenuItem[]> => {
     );
 
     return items.filter(hasAlias).sort((first, second) => first.id - second.id);
-};
+});
