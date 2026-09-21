@@ -1,0 +1,19 @@
+{
+  "name": "pb-headless-demo",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite dev",
+    "build": "vite build",
+    "preview": "vite preview",
+    "ts:check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@ibexa/react-headless": "^0.0.3",
+    "@ibexa/utils": "^0.0.3"
+  },
+  "devDependencies": {
+    "typescript": "^7.0.2",
+    "vite": "^8.3.0"
+  }
+}

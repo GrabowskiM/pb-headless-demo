@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Headless landing page</title>
+        <link rel="icon" href="data:," />
+        <style>
+            :root {
+                --ink: #1f2430;
+                --muted: #6b7280;
+                --line: #e5e7eb;
+                --accent: #ae1164;
+                --surface: #fafafa;
+            }
+
+            * {
+                box-sizing: border-box;
+            }
+
+            body {
+                margin: 0;
+                color: var(--ink);
+                background: #fff;
+                font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+                font-size: 1.0625rem;
+                line-height: 1.6;
+            }
+
+            .site-header,
+            .site-footer {
+                border-block: 1px solid var(--line);
+                background: var(--surface);
+            }
+
+            .site-header__inner,
+            .site-footer__inner,
+            #app {
+                max-width: 60rem;
+                margin: 0 auto;
+                padding: 1rem 1.25rem;
+            }
+
+            .site-header__inner {
+                display: flex;
+                align-items: baseline;
+                justify-content: space-between;
+                gap: 1rem;
+            }
+
+            .site-header__brand {
+                margin: 0;
+                font-size: 1.25rem;
+                font-weight: 700;
+                letter-spacing: 0.01em;
+                text-decoration: none;
+                color: var(--ink);
+            }
+
+            .site-header__brand span {
+                color: var(--accent);
+            }
+
+            .site-header__tagline {
+                margin: 0;
+                color: var(--muted);
+                font-size: 0.9rem;
+            }
+
+            #app {
+                min-height: 50vh;
+                padding-block: 2rem;
+            }
+
+            .block {
+                margin-block: 1.5rem;
+            }
+
+            .block--richtext h1,
+            .block--richtext h2,
+            .block--richtext h3 {
+                margin: 0 0 0.5rem;
+                line-height: 1.25;
+            }
+
+            .block--richtext h2 {
+                font-size: 1.75rem;
+            }
+
+            .block--richtext p {
+                margin: 0 0 1rem;
+            }
+
+            .block--richtext a {
+                color: var(--accent);
+            }
+
+            /* Blocks without a renderer show their name and type. */
+            .block:not(.block--richtext) {
+                padding: 1rem 1.25rem;
+                border: 1px solid var(--line);
+                border-radius: 0.5rem;
+                background: var(--surface);
+                color: var(--muted);
+                font-size: 0.95rem;
+            }
+
+            .site-footer__inner {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+                gap: 0.5rem 1.5rem;
+                color: var(--muted);
+                font-size: 0.9rem;
+            }
+
+            .site-footer p {
+                margin: 0;
+            }
+
+            .site-footer a {
+                color: inherit;
+            }
+
+            @media (max-width: 40rem) {
+                .site-header__inner {
+                    flex-direction: column;
+                    align-items: flex-start;
+                    gap: 0.25rem;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <header class="site-header">
+            <div class="site-header__inner">
+                <a class="site-header__brand" href="/">Head<span>less</span></a>
+                <p class="site-header__tagline">A Page Builder landing page rendered outside Ibexa DXP</p>
+            </div>
+        </header>
+
+        <div id="app"></div>
+
+        <footer class="site-footer">
+            <div class="site-footer__inner">
+                <p>Content managed in Ibexa DXP, served over REST, edited live in Page Builder.</p>
+                <p>Plain JavaScript, no framework, built on <a href="https://github.com/ibexa/frontend-kit">@ibexa/utils</a>.</p>
+            </div>
+        </footer>
+
+        <script type="module" src="/src/main.ts"></script>
+    </body>
+</html>
