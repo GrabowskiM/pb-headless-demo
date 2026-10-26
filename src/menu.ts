@@ -3,7 +3,7 @@ import { createServerFn } from '@tanstack/react-start';
 import { restFetch } from '#/rest';
 
 const MENU_PARENT_LOCATION_ID = 431;
-const MENU_CONTENT_TYPE = 'headless_landing_page';
+const MENU_CONTENT_TYPE = 'landing_page';
 const MENU_LIMIT = 50;
 
 export interface MenuItem {
@@ -57,7 +57,7 @@ const loadCustomAliasPath = async (locationHref: string): Promise<string | null>
 
 const locationId = (href: string): number => Number(href.split('/').pop());
 
-export const loadMenu = createServerFn().handler(async (): Promise<MenuItem[]> => {
+const fetchMenu = async (): Promise<MenuItem[]> => {
     const { View } = await restFetch<ViewResponse>('/api/ibexa/v2/views', 'application/vnd.ibexa.api.View+json', {
         body: JSON.stringify({
             ViewInput: {
@@ -88,4 +88,14 @@ export const loadMenu = createServerFn().handler(async (): Promise<MenuItem[]> =
     );
 
     return items.filter(hasAlias).sort((first, second) => first.id - second.id);
+};
+
+export const loadMenu = createServerFn().handler(async (): Promise<MenuItem[]> => {
+    try {
+        return await fetchMenu();
+    } catch (error) {
+        console.error('Menu unavailable, rendering without it:', error);
+
+        return [];
+    }
 });

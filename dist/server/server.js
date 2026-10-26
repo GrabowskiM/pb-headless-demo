@@ -15921,7 +15921,7 @@ var manifest = {
 	},
 	"8548759e084dbbea5d3a91d40f15ab9de856185e1e79112e342011640da90c1a": {
 		functionName: "loadMenu_createServerFn_handler",
-		importer: () => import("./assets/menu-CrRzR3NO.js")
+		importer: () => import("./assets/menu-i5r-wNtW.js")
 	},
 	"aabbd2620dee9144e9d8a08b72556f5a4a0a0965cfe58cfcbe9ff12e6cd02278": {
 		functionName: "loadPageFieldValueByAlias_createServerFn_handler",

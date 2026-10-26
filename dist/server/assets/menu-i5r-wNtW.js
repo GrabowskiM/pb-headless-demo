@@ -3,7 +3,7 @@ import { t as createServerRpc } from "./createServerRpc-DxU7BA32.js";
 import { n as restFetch } from "./rest-C8BOjDKK.js";
 //#region src/menu.ts?tss-serverfn-split
 var MENU_PARENT_LOCATION_ID = 431;
-var MENU_CONTENT_TYPE = "headless_landing_page";
+var MENU_CONTENT_TYPE = "landing_page";
 var MENU_LIMIT = 50;
 var hasAlias = (item) => item.href !== null;
 var loadCustomAliasPath = async (locationHref) => {
@@ -12,12 +12,7 @@ var loadCustomAliasPath = async (locationHref) => {
 	return (await restFetch(ref._href, "application/vnd.ibexa.api.UrlAlias+json")).UrlAlias.path;
 };
 var locationId = (href) => Number(href.split("/").pop());
-var loadMenu_createServerFn_handler = createServerRpc({
-	id: "8548759e084dbbea5d3a91d40f15ab9de856185e1e79112e342011640da90c1a",
-	name: "loadMenu",
-	filename: "src/menu.ts"
-}, (opts) => loadMenu.__executeServer(opts));
-var loadMenu = createServerFn().handler(loadMenu_createServerFn_handler, async () => {
+var fetchMenu = async () => {
 	const { View } = await restFetch("/api/ibexa/v2/views", "application/vnd.ibexa.api.View+json", {
 		body: JSON.stringify({ ViewInput: {
 			Query: {
@@ -38,6 +33,19 @@ var loadMenu = createServerFn().handler(loadMenu_createServerFn_handler, async (
 		id: locationId(content.MainLocation._href),
 		name: content.TranslatedName
 	})))).filter(hasAlias).sort((first, second) => first.id - second.id);
+};
+var loadMenu_createServerFn_handler = createServerRpc({
+	id: "8548759e084dbbea5d3a91d40f15ab9de856185e1e79112e342011640da90c1a",
+	name: "loadMenu",
+	filename: "src/menu.ts"
+}, (opts) => loadMenu.__executeServer(opts));
+var loadMenu = createServerFn().handler(loadMenu_createServerFn_handler, async () => {
+	try {
+		return await fetchMenu();
+	} catch (error) {
+		console.error("Menu unavailable, rendering without it:", error);
+		return [];
+	}
 });
 //#endregion
 export { loadMenu_createServerFn_handler };
