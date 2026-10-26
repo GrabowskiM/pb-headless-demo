@@ -1,6 +1,8 @@
-import type { BlockData } from '@ibexa/react-headless';
+import type { BlockData } from '@ibexa/cohesivo-sdk-react-headless';
 
 import { restFetch } from '#/rest';
+
+import { attribute } from '../attribute';
 
 export interface QuickImage {
     alternativeText: string;
@@ -24,7 +26,7 @@ const isImageFieldValue = (value: unknown): value is ImageFieldValue =>
     typeof value === 'object' && value !== null && 'alternativeText' in value;
 
 export const loadQuickImage = async (block: BlockData): Promise<QuickImage | null> => {
-    const contentId = block.attributes.find((attribute) => attribute.name === 'image')?.value;
+    const contentId = attribute(block, 'image');
 
     if (!contentId) {
         return null;

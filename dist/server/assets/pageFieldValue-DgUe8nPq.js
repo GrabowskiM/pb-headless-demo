@@ -1,7 +1,7 @@
 import { t as createServerFn } from "./createServerFn-CLui4yE9.js";
 import { t as createServerRpc } from "./createServerRpc-DxU7BA32.js";
-import { n as restFetch } from "./rest-CUNAaj83.js";
-import { n as loadBlockData } from "./blockData-CC4ebmTz.js";
+import { n as restFetch } from "./rest-C8BOjDKK.js";
+import { n as loadBlockData } from "./blockData-B9Jf_YDQ.js";
 //#region src/pageFieldValue.ts?tss-serverfn-split
 var PAGE_LOCATION_ID = 431;
 var loadFieldValue = async (locationQuery) => {

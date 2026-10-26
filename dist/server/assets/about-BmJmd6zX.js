@@ -9,7 +9,7 @@ var About = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("main", { children
 		/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", { children: "What it exercises" }),
 		/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("ul", { children: [
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("li", { children: "Loading a Page field value through the Page Builder REST endpoint." }),
-			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("li", { children: "Rendering zones and blocks with the published @ibexa/react-headless package." }),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("li", { children: "Rendering zones and blocks with the published @ibexa/cohesivo-sdk-react-headless package." }),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("li", { children: "Resolving block data — a content list block fetches the content it points at." }),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("li", { children: "Editing the same page inside Page Builder, where the preview frames this application." })
 		] }),

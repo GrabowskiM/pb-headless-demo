@@ -1,6 +1,8 @@
-import type { BlockData } from '@ibexa/react-headless';
+import type { BlockData } from '@ibexa/cohesivo-sdk-react-headless';
 
 import { restFetch } from '#/rest';
+
+import { attribute as blockAttribute } from '../attribute';
 
 export interface FormField {
     defaultValue: string;
@@ -76,7 +78,7 @@ const parseSuccessMessage = (button: RawField | undefined): string => {
 const RENDERED_TYPES = new Set(['single_line', 'email', 'multi_line']);
 
 export const loadForm = async (block: BlockData): Promise<FormDefinition | null> => {
-    const contentId = block.attributes.find((candidate) => candidate.name === 'contentId')?.value;
+    const contentId = blockAttribute(block, 'contentId');
 
     if (!contentId) {
         return null;

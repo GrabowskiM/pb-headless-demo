@@ -1,4 +1,4 @@
-import type { BlockComponentProps } from '@ibexa/react-headless';
+import type { BlockComponentProps } from '@ibexa/cohesivo-sdk-react-headless';
 
 import { attribute } from '../attribute';
 import { docbookToHtml } from './docbookToHtml';

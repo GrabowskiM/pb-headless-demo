@@ -1,7 +1,7 @@
 import { t as createServerFn } from "./createServerFn-CLui4yE9.js";
-import { t as createServerRpc } from "./createServerRpc-DxU7BA32.js";
-import { a as loadForm, r as loadGalleryImages, s as loadContentListItems, t as loadQuickImage } from "./QuickImageBlock-BIANY00c.js";
-//#region src/blockData.ts?tss-serverfn-split
+import { a as loadForm, r as loadGalleryImages, s as loadContentListItems, t as loadQuickImage } from "./QuickImageBlock-BKYtkibX.js";
+import { t as createSsrRpc } from "./createSsrRpc-DElj1GQc.js";
+//#region src/blockData.ts
 var BLOCK_DATA_LOADERS = {
 	contentlist: loadContentListItems,
 	form: loadForm,
@@ -28,11 +28,6 @@ var loadBlockData = async (fieldValue) => {
 		}))
 	};
 };
-var fetchBlockData_createServerFn_handler = createServerRpc({
-	id: "d824a6e7846707f533526e40e84a19414d341867c98fb84d04d6238afa00b19c",
-	name: "fetchBlockData",
-	filename: "src/blockData.ts"
-}, (opts) => fetchBlockData.__executeServer(opts));
-var fetchBlockData = createServerFn().validator((fieldValue) => fieldValue).handler(fetchBlockData_createServerFn_handler, ({ data }) => loadBlockData(data));
+var fetchBlockData = createServerFn().validator((fieldValue) => fieldValue).handler(createSsrRpc("d824a6e7846707f533526e40e84a19414d341867c98fb84d04d6238afa00b19c"));
 //#endregion
-export { fetchBlockData_createServerFn_handler };
+export { loadBlockData as n, fetchBlockData as t };

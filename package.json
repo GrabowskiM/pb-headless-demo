@@ -20,11 +20,13 @@
     "cs:fix": "npm run prettier:fix && npm run eslint:fix && npm run ts:check"
   },
   "dependencies": {
-    "@ibexa/react-headless": "^0.0.2",
+    "@ibexa/cohesivo-sdk-assets": "^0.0.5",
+    "@ibexa/cohesivo-sdk-react-headless": "^0.0.5",
     "@tanstack/react-router": "^1.170.32",
     "@tanstack/react-start": "^1.168.49",
     "react": "^19.2.0",
-    "react-dom": "^19.2.0"
+    "react-dom": "^19.2.0",
+    "react-error-boundary": "^6.1.2"
   },
   "devDependencies": {
     "@ibexa/eslint-config": "github:ibexa/eslint-config-ibexa#v2.0.0",

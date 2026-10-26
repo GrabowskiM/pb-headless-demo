@@ -1,6 +1,6 @@
 import { a as __toESM, t as require_jsx_runtime } from "./jsx-runtime-CsSE45fb.js";
 import { t as require_react } from "./react-C9I8DVWd.js";
-import { n as restFetch } from "./rest-CUNAaj83.js";
+import { n as restFetch } from "./rest-C8BOjDKK.js";
 //#region src/blockDataContext.ts
 var import_react = /* @__PURE__ */ __toESM(require_react(), 1);
 var BlockDataContext = (0, import_react.createContext)({});
@@ -47,7 +47,10 @@ var PersonCard = ({ item }) => {
 };
 //#endregion
 //#region src/blocks/attribute.ts
-var attribute$2 = ({ attributes }, name) => attributes.find((candidate) => candidate.name === name)?.value ?? "";
+var attribute$2 = ({ attributes }, name) => {
+	const value = attributes.find((candidate) => candidate.name === name)?.value;
+	return value === void 0 || value === null ? "" : String(value);
+};
 //#endregion
 //#region src/blocks/ContentListBlock/ContentListBlock.tsx
 var PERSON_CONTENT_TYPE = "person";
@@ -66,7 +69,10 @@ var ContentListBlock = ({ block }) => {
 };
 //#endregion
 //#region src/blocks/ContentListBlock/loadContentListItems.ts
-var attribute$1 = (block, name) => block.attributes.find((candidate) => candidate.name === name)?.value ?? null;
+var attribute$1 = (block, name) => {
+	const value = block.attributes.find((candidate) => candidate.name === name)?.value;
+	return value === void 0 || value === null ? null : String(value);
+};
 var loadContentListItems = async (block) => {
 	const contentId = attribute$1(block, "contentId");
 	const contentType = attribute$1(block, "contentType");
@@ -178,7 +184,7 @@ var RENDERED_TYPES = /* @__PURE__ */ new Set([
 	"multi_line"
 ]);
 var loadForm = async (block) => {
-	const contentId = block.attributes.find((candidate) => candidate.name === "contentId")?.value;
+	const contentId = attribute$2(block, "contentId");
 	if (!contentId) return null;
 	const { Version } = await restFetch(`/api/ibexa/v2/content/objects/${contentId}/currentversion`, "application/vnd.ibexa.api.Version+json");
 	const formValue = Version.Fields.field.find((field) => field.fieldTypeIdentifier === "ibexa_form")?.fieldValue;
@@ -222,7 +228,7 @@ var GALLERY_LIMIT = 25;
 var IMAGE_CONTENT_TYPE = "image";
 var toPathString = (locationHref) => `${locationHref.replace(LOCATIONS_PREFIX, "")}/`;
 var loadGalleryImages = async (block) => {
-	const contentId = block.attributes.find((attribute) => attribute.name === "contentId")?.value;
+	const contentId = attribute$2(block, "contentId");
 	if (!contentId) return [];
 	const folder = await restFetch(`/api/ibexa/v2/content/objects/${contentId}`, "application/vnd.ibexa.api.ContentInfo+json");
 	return (await restFetch("/api/ibexa/v2/views", "application/vnd.ibexa.api.View+json", {
@@ -270,7 +276,7 @@ var QuickImageBlock = ({ block }) => {
 //#region src/blocks/QuickImageBlock/loadQuickImage.ts
 var isImageFieldValue = (value) => typeof value === "object" && value !== null && "alternativeText" in value;
 var loadQuickImage = async (block) => {
-	const contentId = block.attributes.find((attribute) => attribute.name === "image")?.value;
+	const contentId = attribute$2(block, "image");
 	if (!contentId) return null;
 	const { Version } = await restFetch(`/api/ibexa/v2/content/objects/${contentId}/currentversion`, "application/vnd.ibexa.api.Version+json");
 	if (!Version.Thumbnail) return null;

@@ -1,6 +1,6 @@
 import { t as createServerFn } from "./createServerFn-CLui4yE9.js";
 import { t as createServerRpc } from "./createServerRpc-DxU7BA32.js";
-import { n as restFetch } from "./rest-CUNAaj83.js";
+import { n as restFetch } from "./rest-C8BOjDKK.js";
 //#region src/menu.ts?tss-serverfn-split
 var MENU_PARENT_LOCATION_ID = 431;
 var MENU_CONTENT_TYPE = "headless_landing_page";

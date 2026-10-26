@@ -1,6 +1,8 @@
-import type { BlockData } from '@ibexa/react-headless';
+import type { BlockData } from '@ibexa/cohesivo-sdk-react-headless';
 
 import { restFetch } from '#/rest';
+
+import { attribute } from '../attribute';
 
 const LOCATIONS_PREFIX = '/api/ibexa/v2/content/locations';
 const GALLERY_LIMIT = 25;
@@ -35,7 +37,7 @@ interface ViewResponse {
 const toPathString = (locationHref: string): string => `${locationHref.replace(LOCATIONS_PREFIX, '')}/`;
 
 export const loadGalleryImages = async (block: BlockData): Promise<GalleryImage[]> => {
-    const contentId = block.attributes.find((attribute) => attribute.name === 'contentId')?.value;
+    const contentId = attribute(block, 'contentId');
 
     if (!contentId) {
         return [];

@@ -1,4 +1,4 @@
-import type { BlockData } from '@ibexa/react-headless';
+import type { BlockData } from '@ibexa/cohesivo-sdk-react-headless';
 
 import { restFetch } from '#/rest';
 
@@ -44,8 +44,11 @@ interface ViewResponse {
     View: { Result: { searchHits: { searchHit: ContentHit[] } } };
 }
 
-const attribute = (block: BlockData, name: string): string | null =>
-    block.attributes.find((candidate) => candidate.name === name)?.value ?? null;
+const attribute = (block: BlockData, name: string): string | null => {
+    const value = block.attributes.find((candidate) => candidate.name === name)?.value;
+
+    return value === undefined || value === null ? null : String(value);
+};
 
 export const loadContentListItems = async (block: BlockData): Promise<ContentListItem[]> => {
     const contentId = attribute(block, 'contentId');

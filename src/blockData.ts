@@ -1,6 +1,6 @@
 import { createServerFn } from '@tanstack/react-start';
 
-import type { BlockData, FieldValue } from '@ibexa/react-headless';
+import type { BlockData, FieldValue } from '@ibexa/cohesivo-sdk-react-headless';
 
 import { loadContentListItems } from '#/blocks/ContentListBlock';
 import { loadForm } from '#/blocks/FormBlock';

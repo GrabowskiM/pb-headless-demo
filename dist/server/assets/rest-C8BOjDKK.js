@@ -1,5 +1,5 @@
 //#region src/rest.ts
-var REST_URL = "https://master-7rqtwti-gjkhetmruk5p6.eu-5.platformsh.site";
+var REST_URL = "http://localhost:8000";
 var RestError = class extends Error {
 	status;
 	constructor(status, path) {

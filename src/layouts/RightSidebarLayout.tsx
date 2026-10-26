@@ -1,4 +1,4 @@
-import { Zone } from '@ibexa/react-headless';
+import { Zone } from '@ibexa/cohesivo-sdk-react-headless';
 
 import type { LayoutProps } from './LayoutProps';
 

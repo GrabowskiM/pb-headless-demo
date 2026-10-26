@@ -1,9 +1,9 @@
-import '@ibexa/react-headless/styles/preview.css';
+import '@ibexa/cohesivo-sdk-assets/page-builder/preview.css';
 
-import { LandingPage, useFieldValue, useIsPBMode } from '@ibexa/react-headless';
+import { LandingPage, useFieldValue, useIsPBMode } from '@ibexa/cohesivo-sdk-react-headless';
 import { useEffect, useState } from 'react';
 
-import type { FieldValue } from '@ibexa/react-headless';
+import type { FieldValue } from '@ibexa/cohesivo-sdk-react-headless';
 import type { ReactNode } from 'react';
 
 import type { BlockDataMap, BlockWithData } from '#/blockData';

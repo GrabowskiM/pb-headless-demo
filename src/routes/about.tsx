@@ -11,7 +11,7 @@ const About = () => (
             <h2>What it exercises</h2>
             <ul>
                 <li>Loading a Page field value through the Page Builder REST endpoint.</li>
-                <li>Rendering zones and blocks with the published @ibexa/react-headless package.</li>
+                <li>Rendering zones and blocks with the published @ibexa/cohesivo-sdk-react-headless package.</li>
                 <li>Resolving block data — a content list block fetches the content it points at.</li>
                 <li>Editing the same page inside Page Builder, where the preview frames this application.</li>
             </ul>
